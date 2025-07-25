@@ -32,7 +32,6 @@ export async function showNotification(
     icon: "/icon-192x192.png",
     badge: "/badge-72x72.png",
     tag: "demo-notification",
-    vibrate: [200, 100, 200],
     ...options,
   };
 

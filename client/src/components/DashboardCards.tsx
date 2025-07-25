@@ -37,7 +37,7 @@ const stats = [
   },
 ];
 
-const colorMap = {
+const colorMap: Record<string, string> = {
   blue: "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400",
   emerald: "bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-400",
   amber: "bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-400",
@@ -67,13 +67,10 @@ export function DashboardCards() {
                     className={`mt-1 text-sm ${
                       stat.changeType === "positive"
                         ? "text-emerald-600 dark:text-emerald-400"
-                        : stat.changeType === "negative"
-                        ? "text-red-600 dark:text-red-400"
                         : "text-amber-600 dark:text-amber-400"
                     }`}
                   >
                     {stat.changeType === "positive" && "↗ "}
-                    {stat.changeType === "negative" && "↘ "}
                     {stat.change}
                   </p>
                 </div>
