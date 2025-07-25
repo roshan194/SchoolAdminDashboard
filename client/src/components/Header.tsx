@@ -53,7 +53,7 @@ export function Header({ title, onMenuClick }: HeaderProps) {
               className="h-8 w-8 rounded-full object-cover"
             />
             <span className="hidden text-sm font-medium text-gray-700 dark:text-gray-200 md:block">
-              John Admin
+              Roshan
             </span>
           </div>
         </div>

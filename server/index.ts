@@ -61,11 +61,25 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  
+  // Try to start the server, with automatic port finding if the default is busy
+  const startServer = (portToTry: number): void => {
+    server.listen({
+      port: portToTry,
+      host: "0.0.0.0",
+      reusePort: true,
+    }, () => {
+      log(`serving on port ${portToTry}`);
+    }).on('error', (err: any) => {
+      if (err.code === 'EADDRINUSE') {
+        const nextPort = portToTry + 1;
+        log(`Port ${portToTry} is busy, trying port ${nextPort}...`);
+        startServer(nextPort);
+      } else {
+        throw err;
+      }
+    });
+  };
+
+  startServer(port);
 })();
